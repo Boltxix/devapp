@@ -70,7 +70,7 @@ var https_port = process.env.PORT_HTTPS || 8443;
 var options = {}
 
 if (process.env.ENV !== "DEV") {
-    var key = fs.readFileSync('key.pem', "utf8")
+    var key = fs.readFileSync('privatekey.pem', "utf8")
     console.log(typeof key)
     var cert = fs.readFileSync('server.crt', "utf8")
     var header = "-----BEGIN PRIVATE KEY-----"

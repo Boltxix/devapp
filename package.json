@@ -4,9 +4,9 @@
   "description": "This is an Application create by Maciej & Cameron",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./bin/server.js",
     "test": "node_modules/.bin/mocha --reporter mocha-circleci-reporter test/*.js",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/server.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
