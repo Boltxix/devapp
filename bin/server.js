@@ -1,6 +1,8 @@
 var app = require('../app');
 var debug = require('debug')('phishsense:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -15,7 +17,7 @@ function normPort(val) {
     }
 
     if (port >= 0) {
-        // port number
+        // port numberrs
         return port;
     }
 
@@ -65,9 +67,12 @@ function onError(error) {
 // Add HTTPS Section
 var fs = require('fs');
 var https = require('https');
-var port = normPort(process.env.PORT || '8443');
+var port = normPort(process.env.PORT || '3000');
 var https_port = process.env.PORT_HTTPS || 8443;
 var options = {}
+
+// Define server variable before the conditional block
+var server;
 
 if (process.env.ENV !== "DEV") {
     var key = fs.readFileSync('privatekey.pem', "utf8")
@@ -107,7 +112,6 @@ if (process.env.ENV !== "DEV") {
     */
 
     server.on('error', onError);
-    server.on('listening', onListening);
 
     // Redirect from http port to https
     http.createServer(function (req, res) {
