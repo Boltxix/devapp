@@ -2,17 +2,27 @@
 <html>
 
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheet/style.scss' />
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/stylesheet/home.css">
 </head>
 
 <body>
-    <div className="home">
-        <div className="welcome">
-            <h1>Welcome to the <%= title %></h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/cocktails">Cocktails</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+    <div class="home">
+        <div class="welcome">
+            <h1>Welcome to the <%= title %>
+            </h1>
             <p>Lorem Ipsum</p>
         </div>
-        <div className="nav">
+        <div class="nav">
             <h3>Navigate to the Coctails Page here</h3>
             <button>Cocktails</button>
             <h3>Or Find out more about us</h3>
