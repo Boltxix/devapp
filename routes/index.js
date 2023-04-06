@@ -1,15 +1,19 @@
+//Importing the express library and creating a router object
 var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
+// Defining a route for the home page and rendering the index.ejs view with a title
 router.get('/', function(req, res, next) {
     res.render('index', { title: "DevOps Application" });
   });
 /* GET about page. */
+// Defining a route for the about page and rendering the about.ejs view
 router.get('/about', function(req, res, next) {
     res.render('about');
   });
 /* GET cocktails page. */
+// Defining a route for the cocktails page and creating an array of cocktail objects
 router.get('/cocktails', function(req, res, next) {
     var cocktailList = [
       {

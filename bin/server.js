@@ -1,13 +1,14 @@
-var app = require('../app');
-var debug = require('debug')('phishsense:server');
+//Require necessary modules
+var app = require('../app'); //app is a referance to the main application code
+var debug = require('debug')('phishsense:server');//debug is a function that logs debug information when the server runs, using a namespace of 'phishsense:server'
 var http = require('http');
 var https = require('https');
+//http and https are node.js modules used for creating HTTP and HTTPS server respectively.
 var fs = require('fs');
+// fs is a module used for reading file from the file system
 
-/**
- * Normalize a port into a number, string, or false.
- */
 
+// This function is used to normalize the port number from a string to a number
 function normPort(val) {
     var port = parseInt(val, 10);
 
@@ -23,11 +24,12 @@ function normPort(val) {
 
     return false;
 }
-
-/**
-* Event listener for HTTP server "error" event.
+/*
+ *Even listent that handles errors that occur while trying to listen on a network port. It takes an error objec as its parameter
+ *and check its syscall propert. If the syscall is not listen the function throws the error.
+ *If the sys call is listen the function checks the error code in the error.code propert. The function than logs a specific error
+ *message for each error code and exits the process if necessart
 */
-
 function onError(error) {
     if (error.syscall !== 'listen') {
         throw error;
@@ -37,7 +39,7 @@ function onError(error) {
         ? 'Pipe ' + port
         : 'Port ' + port;
 
-    // handle specific listen errors with friendly messages
+
     switch (error.code) {
         case 'EACCES':
             console.error(bind + ' requires elevated privileges');
@@ -51,10 +53,8 @@ function onError(error) {
             throw error;
     }
 
-    /**
- * Event listener for HTTP server "listening" event.
- */
-
+    //This function is an even listener for HTTP server "error" even.
+    //It logs the error message to the console and exits the process if it encounters specific errors
     function onListening() {
         var addr = server.address();
         var bind = typeof addr === 'string'
@@ -63,57 +63,59 @@ function onError(error) {
         debug('Listening on ' + bind);
     }
 }
-
-// Add HTTPS Section
+/*
+ * This code sets up a server to listen on a specific port. It create an HTTPS server if the environment is not "DEV" and sets up a redirect 
+ * from HTTPS to HTTPS. Otherwise, it creates an HTTP server. The private key and certificate are read from files and used for HTTPS.
+ * The on error function handles server errors.
+*/
 var fs = require('fs');
 var https = require('https');
-var port = normPort(process.env.PORT || '3000');
-var https_port = process.env.PORT_HTTPS || 8443;
+var port = normPort(process.env.PORT || '3000'); // Normalize the HTTP port number 
+var https_port = process.env.PORT_HTTPS || 8443;// Set the HTTPS port number
 var options = {}
 
-// Define server variable before the conditional block
+//Initialize the server variable which will be used to store the HTTP and HTTPS server istance
 var server;
 
 if (process.env.ENV !== "DEV") {
-    var key = fs.readFileSync('privatekey.pem', "utf8")
+    //If the environemnt is not "DEV", create an HTTPS server and set up redirect from HTTP to HTTPS
+    var key = fs.readFileSync('privatekey.pem', "utf8")//Read the private key file from the file system
     console.log(typeof key)
-    var cert = fs.readFileSync('server.crt', "utf8")
+    var cert = fs.readFileSync('server.crt', "utf8")//Read the certificate file from the file system
     var header = "-----BEGIN PRIVATE KEY-----"
     var footer = "-----END PRIVATE KEY-----"
     console.log(key.split(header))
+
+    //Extract the private key from the file contents 
     key = key.split(header)[1]
     key = key.split(footer)[0]
     key = header + "\n" + key.replace(/ /g, "\n") + footer + "\n"
 
     console.log(key)
-
-
+    //Extract the certificate from the certificate file
     var header = "-----BEGIN CERTIFICATE-----"
     var footer = "-----END CERTIFICATE-----"
     cert = cert.split(header)[1]
     cert = cert.split(footer)[0]
     cert = header + "\n" + cert.replace(/ /g, "\n") + footer + "\n"
-
+    //Set the options object with the extracted private key and certificate
     var options = {
         key: key,
         cert: cert
     };
+
+    //Set the server's Port number to the HTTPS port number
     app.set("port", https_port);
 
-    /*
-    ° Create HTTPS server.
-    */
+   // Create the HTTPS server with the "options" object and the "app" instance, and start listening on the HTTPS port
     var server = https.createServer(options, app).listen(https_port, function () {
         console.log('Magic happens on port ' + https_port);
     });
 
-    /**
-    * Listen on provided port, on all network interfaces.
-    */
-
+    // Register the onError function as an error listener for the HTTPS server
     server.on('error', onError);
 
-    // Redirect from http port to https
+    // Create an HTTP server to redirect HTTP requests to HTTPS, and start listening on the HTTP port
     http.createServer(function (req, res) {
         res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(port, https_port) + req.url });
         console.log("http requet, will go to >> ");
@@ -121,12 +123,8 @@ if (process.env.ENV !== "DEV") {
         res.end();
     }).listen(port);
 } else {
-
+    // Create an HTTP server and start listening on the HTTP port
     var server = http.createServer(app);
-
-    /**
-     * Listen on provided port, on all network interfaces.
-     */
 
     server.listen(port);
     server.on('error', onError);
