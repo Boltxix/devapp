@@ -3,21 +3,37 @@
 
 <head>
     <title>DevApp Project</title>
-    <link rel='stylesheet' href='/stylesheet/style.scss' />
+    <link rel='stylesheet' href='/stylesheet/cocktail.css' />
 </head>
 
 <body>
-    <div className="cocktails">
-        <div className="display">
-            <div className="cocktail" key=>
-                <div className="img">
-                    <img src="" alt="" />
-                </div>
-                <div className="content">
-                </div>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/cocktails">Cocktails</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+    <div class="cocktails">
+        <h1>Welcome to the cocktail page</h1>
+        <p>Below you can find a list of the cocktails below</p>
+        <div class="display">
+          <% cocktailList.forEach(function(cocktail) { %>
+            <div class="cocktail">
+              <div class="img">
+                <img src="<%= cocktail.img %>" alt="" />
+              </div>
+              <div class="content">
+                <h1><%= cocktail.title %></h1>
+                <h4>Description</h4>
+                <p><%= cocktail.desc %></p>
+                <h4>Ingredients</h4>
+                <p><%= cocktail.ingred %></p>
+              </div>
             </div>
+          <% }); %>
         </div>
-    </div>
+      </div>
 </body>
 
 </html>
