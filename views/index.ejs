@@ -2,33 +2,28 @@
 <html>
 
 <head>
-    <title>
-        <%= title %>
-    </title>
-    <link rel="stylesheet" href="/stylesheet/home.css">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/stylesheet/home.css">
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/cocktails">Cocktails</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
-    </nav>
-    <div class="home">
-        <div class="welcome">
-            <h1>Welcome to the <%= title %>
-            </h1>
-            <p>Lorem Ipsum</p>
-        </div>
-        <div class="nav">
-            <h3>Navigate to the Coctails Page here</h3>
-            <button>Cocktails</button>
-            <h3>Or Find out more about us</h3>
-            <button>About Page</button>
-        </div>
-    </div>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/cocktails">Cocktails</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <section class="welcome">
+      <h1>Cocktail Connoisseurs</h1>
+      <p>The Leading Site for Cocktail Recipies and Ingredients</p>
+    </section>
+    <section class="button-section">
+      <a href="/cocktails" class="button">Cocktails</a>
+      <a href="/about" class="button">About Us</a>
+    </section>
+  </div>
 </body>
 
 </html>
