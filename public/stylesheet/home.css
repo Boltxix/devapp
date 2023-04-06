@@ -1,0 +1,53 @@
+/* Define font sizes and colors */
+:root {
+  --font-size: 1rem;
+  --heading-font-size: 2rem;
+}
+
+/* Style the home div */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: var(--font-size);
+}
+
+/* Style the welcome div */
+.welcome {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.welcome h1 {
+  font-size: var(--heading-font-size);
+  margin-bottom: 0.5rem;
+}
+
+/* Style the nav div */
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.nav button {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav button:hover {
+  background-color: #666;
+}
