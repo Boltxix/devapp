@@ -65,7 +65,7 @@ function onError(error) {
 // Add HTTPS Section
 var fs = require('fs');
 var https = require('https');
-var port = normPort(process.env.PORT || '8080');
+var port = normPort(process.env.PORT || '8443');
 var https_port = process.env.PORT_HTTPS || 8443;
 var options = {}
 
