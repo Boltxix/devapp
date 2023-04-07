@@ -44,6 +44,20 @@ router.get('/cocktails', function(req, res, next) {
         ingred:"ice,100ml Aperol, 150ml prosecco, soda to top up",
         img:'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/aperol-spritz-0e58f7b.jpg?quality=90&webp=true&resize=300,272'
       },
+      {
+        id:5,
+        title:'Strawberry daiquiri',
+        desc:'The Strawberry Daiquiri is a summertime favorite that evokes sunny days and poolside vacations. At its best, the drink is a refreshing, delicious concoction that highlights good rum, sweet strawberries and fresh lime juice. But during the 1980s and ’90s—the heyday of artificial mixers—the Strawberry Daiquiri’s reputation suffered a hit, as bars served neon-colored cocktails that were absent any actual strawberries. When made with care and fresh ingredients, however, the drink is a revelation..',
+        ingred:"1500g strawberries, hulled 200g ice 100ml rum juice 1/2 lime 1-2 tbsp sugar syrup, optional",
+        img:'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/frozen-strawbz-329b8e5.jpg?quality=90&webp=true&resize=300,272'
+      },
+      {
+        id:6,
+        title:'Mojito',
+        desc:'Mojito is a traditional Cuban punch. The cocktail often consists of five ingredients: white rum, sugar, lime juice, soda water, and mint. Its combination of sweetness, citrus, and herbaceous mint flavors is intended to complement the rum, and has made the mojito a popular summer drink..',
+        ingred:"juice of 1 lime 1 tsp granulated sugar small handful mint leaves, plus extra sprig to serve 60ml white rum soda water, to taste",
+        img:'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/mojito-cocktails-150961e.jpg?quality=90&webp=true&resize=300,272'
+      },
     ]
     res.render('cocktails', {cocktailList});
   });
